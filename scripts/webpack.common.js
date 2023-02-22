@@ -3,21 +3,23 @@ const chalk = require('chalk');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+
 const pkgJSON = require('../package.json');
+const config = require('./config');
+
 console.log('process.env.NODE_ENV: ', process.env.NODE_ENV);
+
 module.exports = {
-  entry: path.resolve(__dirname, '../src/index.js'),
+  entry: config.pathEntry,
   output: {
-    filename: '[name].[hash:8].js',
-    path: path.resolve(__dirname, '../dist'),
+    filename: config.filenameJs,
+    path: config.pathOutput,
     publicPath: '/',
     clean: true,
   },
   resolve: {
     extensions: ['.ts', '.tsx', '.jsx', '.js'],
-    alias: {
-      '@': path.resolve(__dirname, '../src'),
-    },
+    alias: config.resolveAlias,
   },
   module: {
     rules: [
@@ -57,9 +59,13 @@ module.exports = {
       __DEV__: process.env.NODE_ENV === 'development',
     }),
     new HtmlWebpackPlugin({
-      template: path.resolve(__dirname, '../public/index.html'),
+      template: config.pathTemplate,
       title: pkgJSON.name,
       meta: {
+        keywords: {
+          name: 'keywords',
+          content: pkgJSON.keywords,
+        },
         description: {
           type: 'description',
           content: pkgJSON.description,

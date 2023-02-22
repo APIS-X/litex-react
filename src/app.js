@@ -1,8 +1,16 @@
-import { useRoutes } from 'react-router-dom';
-import { routers } from './config/router';
-const App = () => {
-  const appRoutesElement = useRoutes(routers);
-  return appRoutesElement;
-};
+import React from 'react';
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
 
-export default App;
+import Layout from './layouts';
+import { Router } from '@/routers';
+
+const container = document.getElementById('app');
+const root = createRoot(container); // createRoot(container!) if you use TypeScript
+root.render(
+  <BrowserRouter>
+    <Layout>
+      <Router />
+    </Layout>
+  </BrowserRouter>
+);

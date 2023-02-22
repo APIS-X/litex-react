@@ -2,11 +2,14 @@
   "name": "lighter-react",
   "private": true,
   "version": "1.0.0",
-  "description": "基于Webpack 构建的轻量级React项目",
+  "keywords": [
+    "lighter、React、Webpack"
+  ],
+  "description": "基于Webpack构建的轻量级React项目",
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
-    "build": ""
+    "build": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js"
   },
   "author": "APIS",
   "license": "ISC",
@@ -23,6 +26,8 @@
     "autoprefixer": "^10.4.13",
     "babel-loader": "^9.1.2",
     "chalk": "4.1.2",
+    "clean-webpack-plugin": "^4.0.0",
+    "copy-webpack-plugin": "^11.0.0",
     "core-js": "^3.28.0",
     "cross-env": "^7.0.3",
     "css-loader": "^6.7.3",
