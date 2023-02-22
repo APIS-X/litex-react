@@ -45,15 +45,13 @@ module.exports = merge(common, {
     ],
   },
   plugins: [
-    new CleanWebpackPlugin({ cleanStaleWebpackAssets: false }), // 清除历史打包文件
+    new CleanWebpackPlugin({
+      cleanStaleWebpackAssets: false,
+      cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
+    }), // 清除历史打包文件
     new CopyWebpackPlugin({
       // 打包静态文件copy
-      patterns: [
-        // {
-        //   from: settings.pathStaticCopy[0],
-        //   to: settings.pathStaticCopy[1],
-        // },
-      ],
+      patterns: config.pathStaticCopy,
     }),
     new MiniCssExtractPlugin({
       filename: config.filenameCss,

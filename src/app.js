@@ -5,6 +5,8 @@ import { BrowserRouter } from 'react-router-dom';
 import Layout from './layouts';
 import { Router } from '@/routers';
 
+import './styles/global.less';
+
 const container = document.getElementById('app');
 const root = createRoot(container); // createRoot(container!) if you use TypeScript
 root.render(
