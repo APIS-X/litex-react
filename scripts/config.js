@@ -2,15 +2,10 @@ const path = require('path');
 
 const config = {
   port: 3000,
-  context: path.resolve(__dirname, '../src/'), // 开发基础目录
-  pathContentBase: path.resolve(__dirname, '../src/pages'), // devser内容来源
+  pathStatic: path.resolve(__dirname, '../src/pages'), // devServer内容来源
   pathEntry: path.resolve(__dirname, `../src/app`), // 入口文件路径
   pathTemplate: path.resolve(__dirname, `../src/index.ejs`),
   pathStaticCopy: [
-    // {
-    //   from: 'src/assets',
-    //   to: 'assets',
-    // },
     {
       from: 'public/favicon.ico',
       to: 'favicon.ico',

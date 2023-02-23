@@ -7,17 +7,20 @@ const config = require('./config');
 module.exports = merge(common, {
   mode: 'development', // 开发模式
   devServer: {
+    host: 'local-ip',
     hot: true, // 热更新
     open: true, // 编译完自动打开浏览器
     compress: false, // 关闭gzip压缩
     port: config.port, // 开启端口号
-    historyApiFallback: true, // 支持 history 路由重定向到 index.html 文件
-    overlay: {
-      // 编译器错误或者警告是否在浏览器中显示全屏覆盖
-      warnings: false,
-      errors: true,
+    client: {
+      progress: true,
+      overlay: {
+        // 编译器错误或者警告是否在浏览器中显示全屏覆盖
+        warnings: false,
+        errors: true,
+      },
     },
-    stats: 'errors-only', // 控制台输出信息
+    static: false,
   },
   module: {
     // 插件的执行顺序从右到左
@@ -42,8 +45,5 @@ module.exports = merge(common, {
       },
     ],
   },
-  plugins: [
-    new webpack.HotModuleReplacementPlugin(), // 热更新
-  ],
   stats: 'errors-only', // Webpack 在编译的时候只输出错误日志，终端更清爽
 });

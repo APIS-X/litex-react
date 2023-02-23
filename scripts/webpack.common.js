@@ -1,8 +1,7 @@
 const path = require('path');
-const chalk = require('chalk');
 const webpack = require('webpack');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
-const ProgressBarPlugin = require('progress-bar-webpack-plugin');
+const WebpackBar = require('webpackbar');
 
 const pkgJSON = require('../package.json');
 const config = require('./config');
@@ -73,8 +72,10 @@ module.exports = {
       },
       minify: 'auto',
     }),
-    new ProgressBarPlugin({
-      format: `:msg [:bar] ${chalk.green.bold(':percent')} (:elapsed s)`,
+    new WebpackBar({
+      // color: '#85d', // 默认green，进度条颜色支持HEX
+      basic: false, // 默认true，启用一个简单的日志报告器
+      profile: false, // 默认false，启用探查器。
     }),
   ],
 };

@@ -80,4 +80,10 @@ module.exports = merge(common, {
       filename: config.filenameCss,
     }),
   ],
+  stats: {
+    cachedModules: true,
+    preset: 'minimal',
+    moduleTrace: true,
+    errorDetails: true,
+  },
 });
