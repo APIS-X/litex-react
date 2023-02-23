@@ -12,7 +12,6 @@ module.exports = merge(common, {
   optimization: {
     minimize: true,
     minimizer: [
-      '...',
       new TerserPlugin({
         terserOptions: {
           format: {
@@ -47,7 +46,6 @@ module.exports = merge(common, {
   plugins: [
     new CleanWebpackPlugin({
       cleanStaleWebpackAssets: false,
-      cleanAfterEveryBuildPatterns: ['*.LICENSE.txt'],
     }), // 清除历史打包文件
     new CopyWebpackPlugin({
       // 打包静态文件copy
