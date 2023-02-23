@@ -13,8 +13,7 @@ const PageHome = () => {
 
   return (
     <section>
-      这是首页
-      <Link to='/user'>跳转到用户信息</Link>
+      这是首页<Link to='/user'>跳转到用户信息</Link>
     </section>
   );
 };
