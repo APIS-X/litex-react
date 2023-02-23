@@ -18,7 +18,7 @@ module.exports = {
     clean: true,
   },
   resolve: {
-    extensions: ['.ts', '.tsx', '.jsx', '.js'],
+    extensions: ['.ts', '.tsx', '.jsx', '.js', '.less'],
     alias: config.resolveAlias,
   },
   module: {
