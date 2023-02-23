@@ -9,7 +9,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
-    "build": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js"
+    "build": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js",
+    "tree": "tree -I 'node_modules' -L 2  > tree.txt"
   },
   "author": "APIS",
   "license": "ISC",
