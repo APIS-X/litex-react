@@ -5,6 +5,9 @@ const config = require('./config');
 
 module.exports = merge(common, {
   mode: 'development', // 开发模式
+  optimization: {
+    usedExports: true, // Tree Shaking
+  },
   cache: true,
   devServer: {
     host: 'local-ip',
@@ -40,6 +43,7 @@ module.exports = merge(common, {
           },
           'less-loader',
         ],
+        sideEffects: true,
         // 排除 node_modules 目录
         exclude: /node_modules/,
       },

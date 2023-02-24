@@ -49,6 +49,7 @@
     "webpack-merge": "^5.8.0",
     "webpackbar": "^5.0.2"
   },
+  "sideEffects": true,
   "engines": {
     "node": ">=14.18.0"
   }
