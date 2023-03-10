@@ -1,16 +1,15 @@
 import React, { useState } from 'react';
-import { Breadcrumb, Layout, Menu, theme } from 'antd';
+import { Breadcrumb, Layout, Menu, theme, Dropdown, Avatar, Space } from 'antd';
 import {
   LaptopOutlined,
   NotificationOutlined,
   UserOutlined,
+  DownOutlined,
 } from '@ant-design/icons';
 
+import logo from '@/assets/logo.png';
+
 const { Header, Content, Sider } = Layout;
-const items1 = ['1', '2', '3'].map((key) => ({
-  key,
-  label: `nav ${key}`,
-}));
 const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
   (icon, index) => {
     const key = String(index + 1);
@@ -25,9 +24,17 @@ const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
           label: `option${subKey}`,
         };
       }),
+      theme: 'light',
     };
   }
 );
+
+const items = [
+  {
+    key: 'logout',
+    label: '退出',
+  },
+];
 
 const LayoutPage = ({ children }) => {
   const {
@@ -44,11 +51,15 @@ const LayoutPage = ({ children }) => {
       <Sider
         className='layout-sider'
         width={200}
+        collapsedWidth={60}
         collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
-        <div className='logo'></div>
+        <div className={collapsed ? 'logo collapsed' : 'logo'}>
+          <img src={logo} alt='' />
+          <span className='title'>{collapsed ? '' : '工具平台'}</span>
+        </div>
         <Menu
           mode='inline'
           theme='dark'
@@ -59,12 +70,13 @@ const LayoutPage = ({ children }) => {
       </Sider>
       <Layout className='layout-right'>
         <Header className='layout-header' style={styleHeader}>
-          <Menu
-            // theme='dark'
-            mode='horizontal'
-            defaultSelectedKeys={['2']}
-            items={items1}
-          />
+          <Dropdown menu={{ items }}>
+            <Space>
+              <Avatar icon={<UserOutlined />} />
+              超级管理员
+              <DownOutlined />
+            </Space>
+          </Dropdown>
         </Header>
         <Layout className='layout-content'>
           <Breadcrumb>
@@ -79,54 +91,7 @@ const LayoutPage = ({ children }) => {
               background: colorBgContainer,
             }}
           >
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
-            <p>Content</p>
+            {children}
           </Content>
         </Layout>
       </Layout>
