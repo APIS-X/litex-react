@@ -10,6 +10,7 @@ module.exports = merge(common, {
   },
   cache: true,
   devServer: {
+    historyApiFallback: true,
     host: 'local-ip',
     hot: true, // 热更新
     open: true, // 编译完自动打开浏览器

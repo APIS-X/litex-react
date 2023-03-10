@@ -8,8 +8,8 @@
   "description": "基于Webpack构建的轻量级React项目",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon --exec npm run dev:wpk",
-    "dev:wpk": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
+    "dev:watch": "nodemon --exec npm run dev",
+    "dev": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
     "build": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js",
     "tree": "tree -I 'node_modules' -L 2  > tree.txt"
   },
@@ -17,7 +17,6 @@
   "license": "ISC",
   "dependencies": {
     "@ant-design/icons": "^5.0.1",
-    "@ant-design/pro-components": "^2.3.58",
     "antd": "^5.3.0",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",

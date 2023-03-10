@@ -1,51 +1,81 @@
-:global {
-  html,
-  body {
+html,
+body {
+  padding: 0;
+  margin: 0;
+  font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
+    Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+body {
+  * {
+    box-sizing: border-box;
     padding: 0;
     margin: 0;
-    font-family: -apple-system, BlinkMacSystemFont, Segoe UI, Roboto, Oxygen,
-      Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
   }
-
-  a {
-    color: inherit;
-    text-decoration: none;
+  p {
+    margin-bottom: 0;
   }
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+}
 
-  body {
-    * {
-      box-sizing: border-box;
-      padding: 0;
-      margin: 0;
+li {
+  list-style: none;
+}
+
+.img-box {
+  position: relative;
+  &.bg {
+    background: rgba(0, 0, 0, 0.02);
+  }
+  &.hover {
+    cursor: pointer;
+    overflow: hidden;
+    img {
+      transition: all 0.6s;
+      object-fit: cover;
     }
-    p {
-      margin-bottom: 0;
-    }
-    ul {
-      padding: 0;
-      margin: 0;
+    &:hover img {
+      transform: scale(1.1);
     }
   }
+}
 
-  li {
-    list-style: none;
+.layout-screen {
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.layout-sider {
+  position: fixed;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  .logo {
+    height: 64px;
   }
-
-  .img-box {
-    position: relative;
-    &.bg {
-      background: rgba(0, 0, 0, 0.02);
+  .ant-layout-sider-children {
+    & > .ant-menu {
+      height: calc(100vh - 64px - 48px) !important;
+      overflow-y: auto;
     }
-    &.hover {
-      cursor: pointer;
-      overflow: hidden;
-      img {
-        transition: all 0.6s;
-        object-fit: cover;
-      }
-      &:hover img {
-        transform: scale(1.1);
-      }
-    }
+  }
+}
+.layout-content {
+  padding: 16px;
+  height: calc(100vh - 64px) !important;
+  overflow-y: auto;
+  .ant-breadcrumb {
+    margin-bottom: 16px;
+  }
+  .ant-layout-content {
+    min-height: initial;
   }
 }

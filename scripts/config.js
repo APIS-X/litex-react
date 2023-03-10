@@ -17,6 +17,7 @@ const config = {
   resolveAlias: {
     // 别名配置
     '@': path.join(__dirname, '../src'),
+    '@configs': path.join(__dirname, '../config'),
   },
 };
 

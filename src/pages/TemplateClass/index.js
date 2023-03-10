@@ -34,6 +34,6 @@ export default class extends PureComponent {
   render() {
     let { list = [], params = {} } = this.state;
 
-    return <div>这是类组件页面</div>;
+    return <div>类组件模版</div>;
   }
 }
