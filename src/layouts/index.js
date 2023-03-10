@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Layout, Menu, theme, Dropdown, Avatar, Space } from 'antd';
 import {
   LaptopOutlined,
@@ -6,6 +6,8 @@ import {
   UserOutlined,
   DownOutlined,
 } from '@ant-design/icons';
+
+import { userStore } from '@/stores';
 
 import logo from '@/assets/logo.png';
 
@@ -36,23 +38,37 @@ const items = [
   },
 ];
 
+const styleHeader = {
+  background: '#FFF',
+};
+
 const LayoutPage = ({ children }) => {
   const {
-    token: { colorPrimary, colorBgContainer },
+    token: { colorBgContainer },
   } = theme.useToken();
   const [collapsed, setCollapsed] = useState(false);
 
-  const styleHeader = {
-    background: '#FFF',
+  const { userInfo, getUserInfo } = userStore();
+
+  console.log('userInfo', userInfo);
+
+  useEffect(() => {
+    getUserInfo();
+  }, []);
+
+  const styleContent = {
+    padding: 24,
+    margin: 0,
+    background: colorBgContainer,
   };
 
   return (
     <Layout className='layout-screen'>
       <Sider
         className='layout-sider'
+        collapsible
         width={200}
         collapsedWidth={60}
-        collapsible
         collapsed={collapsed}
         onCollapse={(value) => setCollapsed(value)}
       >
@@ -79,20 +95,8 @@ const LayoutPage = ({ children }) => {
           </Dropdown>
         </Header>
         <Layout className='layout-content'>
-          <Breadcrumb>
-            <Breadcrumb.Item>Home</Breadcrumb.Item>
-            <Breadcrumb.Item>List</Breadcrumb.Item>
-            <Breadcrumb.Item>LayoutPage</Breadcrumb.Item>
-          </Breadcrumb>
-          <Content
-            style={{
-              padding: 24,
-              margin: 0,
-              background: colorBgContainer,
-            }}
-          >
-            {children}
-          </Content>
+          <Breadcrumb />
+          <Content style={styleContent}>{children}</Content>
         </Layout>
       </Layout>
     </Layout>

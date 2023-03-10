@@ -3,7 +3,7 @@ import { createRoot } from 'react-dom/client';
 import { BrowserRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 
-import Layout from './layout';
+import Layout from './layouts';
 import { Router } from '@/routers';
 
 import './styles/global.less';
