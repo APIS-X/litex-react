@@ -1,56 +1,99 @@
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
+import {
+  HomeOutlined,
+  UnorderedListOutlined,
+  FileTextOutlined,
+  SettingOutlined,
+} from '@ant-design/icons';
 
 import PageHome from '@/pages/Home';
-import List1 from '@/pages/list/List1';
-import List2 from '@/pages/list/List2';
-import List3 from '@/pages/list/List3';
-import PageUser from '@/pages/User';
+import ListTable from '@/pages/list/ListTable';
+import FormPage from '@/pages/form/FormPage';
+
+/**
+ * 获取路由map
+ * @param {*} menus
+ * @param {*} maps
+ * @returns
+ */
+const getRouteMaps = (menus = [], maps = {}) => {
+  menus.forEach((item) => {
+    maps[item.key] = item;
+    if (item.children) {
+      getRouteMaps(item.children, maps);
+    }
+  });
+
+  return maps;
+};
 
 // 路由配置List
-const routers = [
+const routerList = [
   {
-    path: '/home',
+    key: 'dashboard',
+    label: 'Dashboard',
+    icon: <HomeOutlined />,
+    path: '/',
     element: <PageHome />,
   },
   {
+    key: 'list',
+    label: '列表页',
+    icon: <UnorderedListOutlined />,
     path: '/list',
     children: [
       {
-        path: '/list/1',
-        element: <List1 />,
-      },
-      {
-        path: '/list/2',
-        element: <List2 />,
-      },
-      {
-        path: '/list/3',
-        element: <List3 />,
+        key: 'list-table',
+        label: '表格',
+        path: '/list/table',
+        element: <ListTable />,
       },
     ],
   },
   {
-    path: '/admin',
-    element: <List1 />,
+    key: 'form',
+    label: '表单',
+    icon: <FileTextOutlined />,
+    path: '/form',
     children: [
       {
-        path: '/admin/sub-page1',
-        element: <List1 />,
+        key: 'form-page',
+        label: '常规表单',
+        icon: '',
+        path: '/form/page',
+        element: <FormPage />,
       },
       {
-        path: '/admin/sub-page2',
-        element: <List2 />,
-      },
-      {
-        path: '/admin/sub-page3',
-        element: <List3 />,
+        key: 'form-modal',
+        label: '弹窗',
+        icon: '',
+        path: '/form/modal',
+        element: <FormPage />,
       },
     ],
   },
   {
-    path: '/user',
-    element: <PageUser />,
+    key: 'system',
+    label: '系统管理',
+    icon: <SettingOutlined />,
+    path: '/system',
+    children: [
+      {
+        key: 'system-account',
+        label: '账号管理',
+        icon: '',
+        path: '/system/account',
+        element: <FormPage />,
+      },
+      {
+        key: 'system-role',
+        label: '角色管理',
+        icon: '',
+        path: '/system/role',
+        element: <FormPage />,
+      },
+    ],
   },
   {
     path: '*',
@@ -58,8 +101,10 @@ const routers = [
   },
 ];
 
+const routerMaps = getRouteMaps(routerList);
+
 const Router = () => {
-  return useRoutes(routers);
+  return useRoutes(routerList);
 };
 
-export { routers, Router };
+export { routerList, routerMaps, Router };

@@ -1,35 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Layout, Menu, theme, Dropdown, Avatar, Space } from 'antd';
-import {
-  LaptopOutlined,
-  NotificationOutlined,
-  UserOutlined,
-  DownOutlined,
-} from '@ant-design/icons';
+import { UserOutlined, DownOutlined } from '@ant-design/icons';
+import { useNavigate } from 'react-router-dom';
 
+import { routerList, routerMaps } from '@/routers';
 import { userStore } from '@/stores';
 
 import logo from '@/assets/logo.png';
 
 const { Header, Content, Sider } = Layout;
-const items2 = [UserOutlined, LaptopOutlined, NotificationOutlined].map(
-  (icon, index) => {
-    const key = String(index + 1);
-    return {
-      key: `sub${key}`,
-      icon: React.createElement(icon),
-      label: `subnav ${key}`,
-      children: new Array(4).fill(null).map((_, j) => {
-        const subKey = index * 4 + j + 1;
-        return {
-          key: subKey,
-          label: `option${subKey}`,
-        };
-      }),
-      theme: 'light',
-    };
-  }
-);
 
 const items = [
   {
@@ -46,11 +25,12 @@ const LayoutPage = ({ children }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
+  const [openKeys, setOpenKeys] = useState([]);
+  const [selectedKeys, setSelectedKeys] = useState(['list-table']);
 
   const { userInfo, getUserInfo } = userStore();
-
-  console.log('userInfo', userInfo);
 
   useEffect(() => {
     getUserInfo();
@@ -60,6 +40,20 @@ const LayoutPage = ({ children }) => {
     padding: 24,
     margin: 0,
     background: colorBgContainer,
+  };
+
+  const onChangeMenu = ({ key, keyPath, domEvent }) => {
+    const { path } = routerMaps[key];
+    console.log('path', routerMaps[key], key, keyPath);
+    setSelectedKeys([key]);
+    navigate(path);
+  };
+  const onOpenChange = (openKeys) => {
+    console.log('openKey', openKeys);
+    setOpenKeys([openKeys.pop()]);
+  };
+  const onSelect = ({ item, key, keyPath, selectedKeys, domEvent }) => {
+    console.log('abc', item, key, keyPath, selectedKeys, domEvent);
   };
 
   return (
@@ -79,9 +73,12 @@ const LayoutPage = ({ children }) => {
         <Menu
           mode='inline'
           theme='dark'
-          defaultSelectedKeys={['1']}
-          defaultOpenKeys={['sub1']}
-          items={items2}
+          selectedKeys={selectedKeys}
+          openKeys={openKeys}
+          items={routerList}
+          onClick={onChangeMenu}
+          onOpenChange={onOpenChange}
+          onSelect={onSelect}
         />
       </Sider>
       <Layout className='layout-right'>
