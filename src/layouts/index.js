@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Layout, Menu, theme, Dropdown, Avatar, Space } from 'antd';
 import { UserOutlined, DownOutlined } from '@ant-design/icons';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 
 import { routerList, routerMaps } from '@/routers';
 import { userStore } from '@/stores';
@@ -25,6 +25,7 @@ const LayoutPage = ({ children }) => {
   const {
     token: { colorBgContainer },
   } = theme.useToken();
+  const location = useLocation();
   const navigate = useNavigate();
   const [collapsed, setCollapsed] = useState(false);
   const [openKeys, setOpenKeys] = useState([]);
@@ -33,6 +34,7 @@ const LayoutPage = ({ children }) => {
   const { userInfo, getUserInfo } = userStore();
 
   useEffect(() => {
+    initMenuKey();
     getUserInfo();
   }, []);
 
@@ -42,18 +44,22 @@ const LayoutPage = ({ children }) => {
     background: colorBgContainer,
   };
 
+  const initMenuKey = () => {
+    const path = location.pathname;
+    const { keys } = routerMaps[path];
+    const selectedKeys = keys.pop();
+
+    setSelectedKeys(selectedKeys);
+    setOpenKeys(keys);
+  };
+
   const onChangeMenu = ({ key, keyPath, domEvent }) => {
     const { path } = routerMaps[key];
-    console.log('path', routerMaps[key], key, keyPath);
     setSelectedKeys([key]);
     navigate(path);
   };
   const onOpenChange = (openKeys) => {
-    console.log('openKey', openKeys);
     setOpenKeys([openKeys.pop()]);
-  };
-  const onSelect = ({ item, key, keyPath, selectedKeys, domEvent }) => {
-    console.log('abc', item, key, keyPath, selectedKeys, domEvent);
   };
 
   return (
@@ -78,7 +84,6 @@ const LayoutPage = ({ children }) => {
           items={routerList}
           onClick={onChangeMenu}
           onOpenChange={onOpenChange}
-          onSelect={onSelect}
         />
       </Sider>
       <Layout className='layout-right'>

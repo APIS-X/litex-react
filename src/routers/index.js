@@ -17,11 +17,13 @@ import FormPage from '@/pages/form/FormPage';
  * @param {*} maps
  * @returns
  */
-const getRouteMaps = (menus = [], maps = {}) => {
-  menus.forEach((item) => {
-    maps[item.key] = item;
-    if (item.children) {
-      getRouteMaps(item.children, maps);
+const getRouteMaps = ({ parents = {}, items = [], maps = {} }) => {
+  items.forEach((k) => {
+    k.keys = [...(parents.keys || []), k.key];
+    maps[k.key] = k;
+    maps[k.path] = k;
+    if (k.children) {
+      maps = getRouteMaps({ parents: k, items: k.children, maps });
     }
   });
 
@@ -99,9 +101,12 @@ const routerList = [
     path: '*',
     element: <>404 Not Found!</>,
   },
-];
+].map((k) => {
+  k.theme = 'light';
+  return k;
+});
 
-const routerMaps = getRouteMaps(routerList);
+const routerMaps = getRouteMaps({ items: routerList });
 
 const Router = () => {
   return useRoutes(routerList);

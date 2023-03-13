@@ -8,7 +8,7 @@ const PageHome = () => {
 
   useEffect(() => {
     const currentParams = Object.fromEntries([...searchParams]);
-    console.log('location', location, searchParams, currentParams);
+    // console.log('location', location, searchParams, currentParams);
   }, []);
 
   return (
