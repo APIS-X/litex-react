@@ -1,6 +1,6 @@
 import { create } from 'zustand';
 
-export const userStore = create((set) => ({
+export const globalStore = create((set) => ({
   userInfo: {
     userName: '超级管理员',
     count: 1,
