@@ -1,4 +1,4 @@
-# lighter-react
+# litex-react
 
 轻量级的 react 项目模板
 

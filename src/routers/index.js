@@ -1,3 +1,7 @@
+/**
+ * 路由配置
+ */
+
 import React from 'react';
 import { useRoutes } from 'react-router-dom';
 import {
@@ -30,7 +34,21 @@ const getRouteMaps = ({ parents = {}, items = [], maps = {} }) => {
   return maps;
 };
 
-// 路由配置List
+/**
+ * 路由配置List
+ * 
+数据模型：
+{
+  key: 路由唯一KEY,
+  label: 菜单标题,
+  icon: 菜单icon,
+  path: 菜单路径,
+  element: 菜单页面组件,
+  extra: { 
+    hideBreadcrumb: 扩展字段 - 是否显示面包屑 ,
+  }
+}
+ */
 const routerList = [
   {
     key: 'dashboard',
