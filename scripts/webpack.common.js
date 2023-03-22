@@ -33,7 +33,7 @@ module.exports = {
         use: ['raw-loader'],
       },
       {
-        test: /\.(png|svg|jpg|gif)$/,
+        test: /\.(png|svg|jpg|jpeg|gif)$/,
         use: [
           {
             // 图片文件小于8k时编译成dataUrl直接嵌入页面，超过8k回退使用file-loader

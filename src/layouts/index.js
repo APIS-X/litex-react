@@ -2,9 +2,8 @@ import React, { useState, useEffect } from 'react';
 import { Breadcrumb, Layout, theme } from 'antd';
 import { useNavigate, useLocation } from 'react-router-dom';
 
-import { routerList, routerMaps } from '@/routers';
 import { globalStore } from '@/stores';
-
+import { routerMaps } from '@/routers';
 import Siderbar from './Siderbar';
 import Header from './Header';
 
@@ -17,6 +16,8 @@ const LayoutPage = ({ children }) => {
 
   const { getUserInfo } = globalStore();
 
+  const { pathname } = useLocation();
+
   useEffect(() => {
     getUserInfo();
   }, []);
@@ -27,13 +28,22 @@ const LayoutPage = ({ children }) => {
     background: colorBgContainer,
   };
 
+  const currentRoute = routerMaps[pathname] || {};
+
+  const items = currentRoute.keys?.map((k) => {
+    return {
+      key: k,
+      title: routerMaps[k]?.label,
+    };
+  });
+
   return (
     <Layout className='layout-screen'>
       <Siderbar />
       <Layout className='layout-right'>
         <Header />
         <Layout className='layout-content'>
-          <Breadcrumb />
+          {!currentRoute.extra?.hideBreadcrumb && <Breadcrumb items={items} />}
           <Content style={styleContent}>{children}</Content>
         </Layout>
       </Layout>

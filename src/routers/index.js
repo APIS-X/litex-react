@@ -38,6 +38,9 @@ const routerList = [
     icon: <HomeOutlined />,
     path: '/',
     element: <PageHome />,
+    extra: {
+      hideBreadcrumb: true,
+    },
   },
   {
     key: 'list',

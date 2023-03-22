@@ -5,7 +5,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 import { routerList, routerMaps } from '@/routers';
 import { STORAGE_TOKEN } from '@/constants';
 
-import logo from '@/assets/logo.png';
+import logo from '@/assets/logo.jpeg';
 
 const { Sider } = Layout;
 const { collapsedKey } = STORAGE_TOKEN;
@@ -21,7 +21,7 @@ const Siderbar = () => {
 
   useEffect(() => {
     setMenuSelect();
-  }, [routerList]);
+  }, [routerList, collapsed]);
 
   const setMenuSelect = () => {
     const path = location.pathname;
@@ -29,7 +29,7 @@ const Siderbar = () => {
     const selectedKeys = [...(keys || [])].pop();
 
     setSelectedKeys(selectedKeys);
-    setOpenKeys(keys);
+    setOpenKeys(collapsed ? [] : keys);
   };
 
   const changeMenuClick = ({ key, keyPath, domEvent }) => {

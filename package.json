@@ -8,8 +8,9 @@
   "description": "基于Webpack构建的轻量级React项目",
   "main": "index.js",
   "scripts": {
-    "dev:watch": "nodemon --exec npm run dev",
+    "start": "cross-env npm run dev",
     "dev": "cross-env NODE_ENV=development webpack serve -c scripts/webpack.dev.js",
+    "dev:watch": "nodemon --exec npm run dev",
     "build": "cross-env NODE_ENV=production webpack -c scripts/webpack.prod.js",
     "tree": "tree -I 'node_modules' -L 2  > tree.txt"
   },

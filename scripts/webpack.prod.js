@@ -44,6 +44,7 @@ module.exports = merge(common, {
             comments: false,
           },
         },
+        parallel: true,
         extractComments: false,
       }),
     ],
