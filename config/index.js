@@ -9,8 +9,13 @@ export const layoutSettings = {
   fixSiderbar: true,
   splitMenus: true,
 };
+// theme设置
+export const themes = {
+  // colorPrimary: ''
+};
 
 export default {
   title,
   layoutSettings,
+  themes,
 };

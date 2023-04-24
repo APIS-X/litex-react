@@ -1,4 +1,5 @@
 import React, { PureComponent } from 'react';
+import { Button } from 'antd';
 
 export default class extends PureComponent {
   constructor(props) {
@@ -6,6 +7,7 @@ export default class extends PureComponent {
   }
 
   state = {
+    count: 0,
     list: [],
     params: {
       curPage: 1,
@@ -31,9 +33,23 @@ export default class extends PureComponent {
 
   getList = (obj) => {};
 
+  increment = () => {
+    setTimeout(() => {
+      this.setState({
+        count: this.state.count + 1,
+      });
+    }, 1000);
+  };
+
   render() {
     let { list = [], params = {} } = this.state;
 
-    return <div>类组件模版</div>;
+    return (
+      <div>
+        <Button type='primary' onClick={this.increment}>
+          {this.state.count}
+        </Button>
+      </div>
+    );
   }
 }

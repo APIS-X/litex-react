@@ -4,6 +4,7 @@ import { useNavigate, useLocation } from 'react-router-dom';
 
 import { routerList, routerMaps } from '@/routers';
 import { STORAGE_TOKEN } from '@/constants';
+import { title } from '@configs';
 
 import logo from '@/assets/logo.jpeg';
 
@@ -57,7 +58,7 @@ const Siderbar = () => {
     >
       <div className={collapsed ? 'logo collapsed' : 'logo'}>
         <img src={logo} alt='' />
-        <span className='title'>{collapsed ? '' : '工具平台'}</span>
+        <span className='title'>{collapsed ? '' : title}</span>
       </div>
       <Menu
         mode='inline'

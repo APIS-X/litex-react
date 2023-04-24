@@ -1,21 +1,18 @@
-import React from 'react';
-import { useEffect } from 'react';
-import { Link, useLocation, useSearchParams } from 'react-router-dom';
+import React, { useState, useEffect } from 'react';
+import { Link } from 'react-router-dom';
+import { Button } from 'antd';
+
+import { useQuery } from '@/stores/hooks';
+import { bubbleSort, quickSort } from '@/utils/sort';
 
 const PageHome = () => {
-  const [searchParams, setSearchParams] = useSearchParams();
-  const location = useLocation();
+  const query = useQuery();
 
   useEffect(() => {
-    const currentParams = Object.fromEntries([...searchParams]);
-    // console.log('location', location, searchParams, currentParams);
+    console.log('bubbleSort', quickSort([3, 2, 1, 4, 6]));
   }, []);
 
-  return (
-    <section>
-      这是首页 <Link to='/user'>跳转到用户信息</Link>
-    </section>
-  );
+  return <section></section>;
 };
 
 export default PageHome;

@@ -14,6 +14,7 @@ import {
 import PageHome from '@/pages/Home';
 import ListTable from '@/pages/list/ListTable';
 import FormPage from '@/pages/form/FormPage';
+import TemplateClass from '@/pages/TemplateClass';
 
 /**
  * 获取路由map
@@ -115,6 +116,21 @@ const routerList = [
         icon: '',
         path: '/system/role',
         element: <FormPage />,
+      },
+    ],
+  },
+  {
+    key: 'demo',
+    label: '测试',
+    icon: <SettingOutlined />,
+    path: '/demo',
+    children: [
+      {
+        key: 'demo-class',
+        label: '类组件',
+        icon: '',
+        path: '/demo/class',
+        element: <TemplateClass />,
       },
     ],
   },
